@@ -11,8 +11,8 @@ class User:
         self.name = user_name
         self.friends = []
 
-    def add_friend(self, friend: str):
-        self.friends += friend
+    def add_friend(self, friend_name: str):
+        self.friends += friend_name
 
 
 class SocialNetwork:
@@ -28,8 +28,11 @@ class SocialNetwork:
         return self.users[user_name]
 
     def add_friend(self, user_name: str, friend_name: str) -> User:
-        self.users[user_name] = friend_name
-        return User(user_name, friend_name)
+        user = self.add_user(user_name)
+        friend = self.add_user(friend_name)
+        user.add_friend(friend_name)
+        friend.add_friend(user_name)
+        return friend
 
     def get_user(self, user_name: str) -> Optional[User]:
         if user_name in self.users:
