@@ -126,9 +126,14 @@ class Printer:
         :param data: list of users and their friends to output.
         :return: None.
         """
-        all_users: dict[str, User.friend_names] = data.users
+        all_users: dict[str, User] = data.users
         for user_name in all_users:
-            print(f"{user_name} -> {all_users[user_name]}")
+            user_friends: list[User] = data.get_friends(user_name)
+            friend_names: list[str] = []
+            for friend in user_friends:
+                friend_names += friend.name
+            friend_names_str: str = ", ".join(friend_names)
+            print(f"{user_name} -> {friend_names_str}")
 
 
 class Runner:
