@@ -132,7 +132,13 @@ class Runner:
     """
     Runs the program.
     """
-    def run(self, file_name):
+    @staticmethod
+    def run(file_name):
+        """
+        Starts running the program.
+        :param file_name: name of the .txt file to open and load.
+        :return: None
+        """
         if exists(file_name):
             load = Loader()
             load.load(file_name)
