@@ -23,7 +23,7 @@ class User:
         :param friend_name: name of the friend to add.
         :return: None
         """
-        self.friend_names += friend_name
+        self.friend_names += [friend_name]
 
 
 class SocialNetwork:
@@ -83,7 +83,7 @@ class SocialNetwork:
         result: list[User] = []
         for friend_name in user.friend_names:
             friend: User = self.get_user(friend_name)
-            result += friend
+            result += [friend]
         return result
 
 
@@ -102,9 +102,11 @@ class Loader:
         i = 0
         with open(data_file_name, "r") as reader:
             for line in reader.readlines():
+                line = line.strip()
                 if i > 0:
                     connection: list[str] = line.split()
                     if len(connection) == 1:
+                        user_name: str = connection[0]
                         sn.add_user(user_name)
                     elif len(connection) == 2:
                         user_name, friend_name = connection
@@ -131,7 +133,7 @@ class Printer:
             user_friends: list[User] = data.get_friends(user_name)
             friend_names: list[str] = []
             for friend in user_friends:
-                friend_names += friend.name
+                friend_names += [friend.name]
             friend_names_str: str = ", ".join(friend_names)
             print(f"{user_name} -> {friend_names_str}")
 
