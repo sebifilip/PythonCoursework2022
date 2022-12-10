@@ -35,14 +35,14 @@ class SocialNetwork:
         return friend
 
     def get_user(self, user_name: str) -> Optional[User]:
+        self.users[user_name] = User(user_name)
         if user_name in self.users:
-            user = User(user_name.name, user_name.friends)
-            return user.name
+            return self.users[user_name]
         return None
 
     def get_friends(self, user_name: str) -> list[User]:
-        user = User(user_name, user_name.friends)
-        return user.friends
+        user = self.get_user(user_name)
+        return 
 
 
 class Loader:
