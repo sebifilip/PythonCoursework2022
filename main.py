@@ -1,47 +1,47 @@
 from os.path import exists
+from typing import Optional
 
 
 class User:
 
-    def __init__(self, name, friends):
-        self.friends = friends
-        self.name = name
+    name: str
+    friends: list[str]
 
-    def constructor(self, user_name):
+    def __init__(self, user_name: str):
         self.name = user_name
+        self.friends = []
 
-    def add_friend(self, friend):
+    def add_friend(self, friend: str):
         self.friends += friend
 
 
 class SocialNetwork:
 
-    def __init__(self, users):
-        self.users = users
+    users: dict[str, User]
 
-    def add_user(self, user_name):
+    def add_user(self, user_name: str) -> User:
         if user_name not in self.users:
             self.users[user_name] = ""
         return User(user_name, "")
 
-    def add_friend(self, user_name, friend_name):
+    def add_friend(self, user_name: str, friend_name: str) -> User:
         self.users[user_name] = friend_name
         return User(user_name, friend_name)
 
-    def get_user(self, user_name):
+    def get_user(self, user_name: str) -> Optional[User]:
         if user_name in self.users:
             user = User(user_name.name, user_name.friends)
             return user.name
         return None
 
-    def get_friends(self, user_name):
+    def get_friends(self, user_name: str) -> list[User]:
         user = User(user_name, user_name.friends)
         return user.friends
 
 
 class Loader:
 
-    def load(self, data_file_name):
+    def load(self, data_file_name) -> SocialNetwork:
         social_NW = {}
         social_NW_ins = SocialNetwork(social_NW)
         i = 0
