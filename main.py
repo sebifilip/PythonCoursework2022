@@ -148,19 +148,18 @@ class Runner:
         :return: None
         """
         if exists(file_name):
-            load = Loader()
-            load.load(file_name)
-            disp = input("Display the social network (y/n)? ")
+            loaded_file: Loader = Loader()
+            loaded_file.load(file_name)
+            disp: str = input("Display the social network (y/n)? ")
             if disp == "n":
                 pass
             elif disp == "y":
-                disp = Printer()
-                disp.display(file_name)
+                pretty_printer: Printer = Printer()
+                pretty_printer.display(file_name)
         else:
             print("Sorry, could not open file!")
-            return None
 
 
-program = Runner()
+program: Runner = Runner()
 print("Social network simulator.")
 program.run(input("Enter a file name for network data: "))
