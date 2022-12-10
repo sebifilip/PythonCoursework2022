@@ -12,7 +12,7 @@ class User:
     def __init__(self, user_name: str):
         """
         Initialises the user object with an empty list of friend names.
-        :param user_name: name of the user
+        :param user_name: name of the user.
         """
         self.name = user_name
         self.friend_names = []
@@ -51,8 +51,8 @@ class SocialNetwork:
     def add_friend(self, user_name: str, friend_name: str) -> User:
         """
         Associates a user to a new friend.
-        :param user_name: name of user to associate
-        :param friend_name: name of friend to associate with
+        :param user_name: name of user to associate.
+        :param friend_name: name of friend to associate with.
         :return: user object corresponding to a friend.
         """
         user: User = self.add_user(user_name)
@@ -116,12 +116,22 @@ class Printer:
     """
     Displays the social network on the Python console.
     """
-    def display(self, data: SocialNetwork):
-        print(f"->")
+    @staticmethod
+    def display(data: SocialNetwork):
+        """
+        Pretty prints the social network on the Python terminal.
+        :param data: list of users and their friends to output.
+        :return: None.
+        """
+        all_users: dict = data.users
+        for user_name in all_users:
+            print(f"{user_name}-> {all_users[user_name]}")
 
 
 class Runner:
-
+    """
+    Runs the program.
+    """
     def run(self, file_name):
         if exists(file_name):
             load = Loader()
