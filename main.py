@@ -19,10 +19,13 @@ class SocialNetwork:
 
     users: dict[str, User]
 
+    def __init__(self):
+        self.users = {}
+
     def add_user(self, user_name: str) -> User:
         if user_name not in self.users:
-            self.users[user_name] = ""
-        return User(user_name, "")
+            self.users[user_name] = User(user_name)
+        return self.users[user_name]
 
     def add_friend(self, user_name: str, friend_name: str) -> User:
         self.users[user_name] = friend_name
