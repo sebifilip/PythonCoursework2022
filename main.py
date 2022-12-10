@@ -148,14 +148,16 @@ class Runner:
         :return: None
         """
         if exists(file_name):
-            loaded_file: Loader = Loader()
-            loaded_file.load(file_name)
+            file_instance: Loader = Loader()
+            file_instance.load(file_name)
             disp: str = input("Display the social network (y/n)? ")
             if disp == "n":
                 pass
             elif disp == "y":
-                pretty_printer: Printer = Printer()
-                pretty_printer.display(file_name)
+                printer_instance: Printer = Printer()
+                printer_instance.display(file_name)
+            else:
+                print("Invalid input!")
         else:
             print("Sorry, could not open file!")
 
@@ -163,3 +165,11 @@ class Runner:
 program: Runner = Runner()
 print("Social network simulator.")
 program.run(input("Enter a file name for network data: "))
+while True:
+    another_network = input("Do you want to try another network? ")
+    if another_network == "y":
+        program.run(input("Enter a file name for network data: "))
+    elif another_network == "n":
+        pass
+    else:
+        print("Invalid input!")
