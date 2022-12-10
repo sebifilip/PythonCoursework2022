@@ -20,9 +20,9 @@ class SocialNetwork:
         self.users = users
 
     def add_user(self, user_name):
-        if user_name in self.users:
+        if user_name not in self.users:
             self.users[user_name] = ""
-        return User(user_name)
+        return User(user_name, "")
 
     def add_friend(self, user_name, friend_name):
         self.users[user_name] = friend_name
@@ -35,47 +35,52 @@ class SocialNetwork:
         return None
 
     def get_friends(self, user_name):
-        user = User(user_name.name, user_name.friends)
+        user = User(user_name, user_name.friends)
         return user.friends
 
 
 class Loader:
 
-    def load(self, data_file_name):
-        if exists(data_file_name):
-            data = open(data_file_name, "r")
-        else:
-            print("Sorry, could not open file!")
-        social_NW = SocialNetwork({})
-        lines = data.readlines()
-        for l in lines:
-            connection = l.split(" ")
-            for u in connection:
-                user = User(u, [])
-                social_NW.add_user(user)
+    def load(self, data_file_name: str):
+        social_NW = {}
+        social_NW_ins = SocialNetwork(social_NW)
+        i = 0
+        with open(data_file_name, "r") as reader:
+            for line in reader.readlines():
+                connection = line.split(" ")
+                if i > 0:
+                    for u in connection:
+                        social_NW_ins.add_user(u)
+        print(social_NW)
+        return social_NW
 
 
 class Printer:
 
     def display(self, data):
-        for user in data:
-            print(f"{user.get_user(user)} -> {user.get_friends(data[user])}")
+        users = Loader()
+        users.load(data)
+        for u in data:
+            print(f"->")
 
 
 class Runner:
 
-    def run(self, file_name):
-        self.file_name = file_name
-        print("Social network simulator.")
-        load = Loader()
-        load.load(self.file_name)
-        disp = input("Display the social network (y/n)? ")
-        if disp == "n":
-            pass
-        elif disp == "y":
-            disp = Printer(SocialNetwork())
-            disp.display(self.file_name)
+    def run(self, file_name: str):
+        if exists(file_name):
+            load = Loader()
+            load.load(file_name)
+            disp = input("Display the social network (y/n)? ")
+            if disp == "n":
+                pass
+            elif disp == "y":
+                disp = Printer()
+                disp.display(file_name)
+        else:
+            print("Sorry, could not open file!")
+            return None
 
 
 program = Runner()
+print("Social network simulator.")
 program.run(input("Enter a file name for network data: "))
