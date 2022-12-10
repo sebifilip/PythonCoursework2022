@@ -41,7 +41,7 @@ class SocialNetwork:
 
 class Loader:
 
-    def load(self, data_file_name: str):
+    def load(self, data_file_name):
         social_NW = {}
         social_NW_ins = SocialNetwork(social_NW)
         i = 0
@@ -66,7 +66,7 @@ class Printer:
 
 class Runner:
 
-    def run(self, file_name: str):
+    def run(self, file_name):
         if exists(file_name):
             load = Loader()
             load.load(file_name)
