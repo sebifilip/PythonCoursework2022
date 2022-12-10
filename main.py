@@ -123,7 +123,7 @@ class Printer:
         :param data: list of users and their friends to output.
         :return: None.
         """
-        all_users: dict[str] = data.users
+        all_users: dict[str, User] = data.users
         for user_name in all_users:
             print(f"{user_name} -> {all_users[user_name]}")
 
