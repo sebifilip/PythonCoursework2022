@@ -103,11 +103,14 @@ class Loader:
         with open(data_file_name, "r") as reader:
             for line in reader.readlines():
                 if i > 0:
-                    connection = line.split()
-                    if len(connection) < 1 or len(connection) > 2:
+                    if len(connection) == 1:
+                        sn.add_friend(user_name, "")
+                    elif len(connection) == 2:
+                        connection: list[str] = line.split()
+                        user_name, friend_name = connection
+                        sn.add_friend(user_name, friend_name)
+                    else:
                         raise ValueError("Social network line does not have one or two elements: " + line)
-                    user_name, friend_name = connection
-                    sn.add_friend(user_name, friend_name)
                 i += 1
         return sn
 
