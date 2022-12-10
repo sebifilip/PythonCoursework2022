@@ -104,7 +104,7 @@ class Loader:
             for line in reader.readlines():
                 if i > 0:
                     if len(connection) == 1:
-                        sn.add_friend(user_name, "")
+                        sn.add_user(user_name)
                     elif len(connection) == 2:
                         connection: list[str] = line.split()
                         user_name, friend_name = connection
