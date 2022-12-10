@@ -160,13 +160,12 @@ class Runner:
             print("Sorry, could not open file!")
 
 
-program: Runner = Runner()
 print("Social network simulator.")
-program.run(input("Enter a file name for network data: "))
+Runner.run(input("Enter a file name for network data: "))
 while True:
     another_network = input("Do you want to try another network? ")
     if another_network == "y":
-        program.run(input("Enter a file name for network data: "))
+        Runner.run(input("Enter a file name for network data: "))
     elif another_network == "n":
         pass
     else:
