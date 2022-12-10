@@ -6,7 +6,6 @@ class User:
     """
     Encapsulation of a user with the names of its friends.
     """
-
     name: str
     friend_names: list[str]
 
@@ -31,7 +30,6 @@ class SocialNetwork:
     """
     Encapsulation of the users and their friends.
     """
-
     users: dict[str, User]
 
     def __init__(self):
@@ -100,7 +98,7 @@ class Loader:
         :param data_file_name: name of the data file to open and read.
         :return: social network object.
         """
-        sn = SocialNetwork()
+        sn: SocialNetwork = SocialNetwork()
         i = 0
         with open(data_file_name, "r") as reader:
             for line in reader.readlines():
@@ -115,12 +113,11 @@ class Loader:
 
 
 class Printer:
-
-    def display(self, data):
-        users = Loader()
-        users.load(data)
-        for u in data:
-            print(f"->")
+    """
+    Displays the social network on the Python console.
+    """
+    def display(self, data: SocialNetwork):
+        print(f"->")
 
 
 class Runner:
