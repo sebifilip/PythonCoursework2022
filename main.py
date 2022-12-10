@@ -1,29 +1,6 @@
 from os.path import exists
 from typing import Optional
-
-
-class User:
-    """
-    Encapsulation of a user with the names of its friends.
-    """
-    name: str
-    friend_names: list[str]
-
-    def __init__(self, user_name: str):
-        """
-        Initialises the user object with an empty list of friend names.
-        :param user_name: name of the user.
-        """
-        self.name = user_name
-        self.friend_names = []
-
-    def add_friend(self, friend_name: str):
-        """
-        Adds a name to the list of friend names.
-        :param friend_name: name of the friend to add.
-        :return: None
-        """
-        self.friend_names += [friend_name]
+from user import User
 
 
 class SocialNetwork:
@@ -150,14 +127,16 @@ class Runner:
         :return: None
         """
         if exists(file_name):
-            network: SocialNetwork = Loader.load(file_name)
+            social_NW: SocialNetwork = Loader.load(file_name)
             disp: str = input("Display the social network (y/n)? ")
             if disp == "n":
                 pass
             elif disp == "y":
-                Printer.display(network)
+                Printer.display(social_NW)
             else:
                 print("Invalid input!")
+        elif file_name == "n":
+            pass
         else:
             print("Sorry, could not open file!")
 
@@ -169,6 +148,6 @@ while True:
     if another_network == "y":
         Runner.run(input("Enter a file name for network data: "))
     elif another_network == "n":
-        pass
+        break
     else:
         print("Invalid input!")
