@@ -141,21 +141,19 @@ class Runner:
     Runs the program.
     """
     @staticmethod
-    def run(file_name):
+    def run(file_name: str):
         """
         Starts running the program.
         :param file_name: name of the .txt file to open and load.
         :return: None
         """
         if exists(file_name):
-            file_instance: Loader = Loader()
-            file_instance.load(file_name)
+            network: SocialNetwork = Loader.load(file_name)
             disp: str = input("Display the social network (y/n)? ")
             if disp == "n":
                 pass
             elif disp == "y":
-                printer_instance: Printer = Printer()
-                printer_instance.display(file_name)
+                Printer.display(network)
             else:
                 print("Invalid input!")
         else:
