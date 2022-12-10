@@ -105,7 +105,7 @@ class Loader:
                 if i > 0:
                     connection = line.split()
                     if len(connection) < 1 or len(connection) > 2:
-                        raise ValueError("Social network line does not have two elements: " + line)
+                        raise ValueError("Social network line does not have one or two elements: " + line)
                     user_name, friend_name = connection
                     sn.add_friend(user_name, friend_name)
                 i += 1
