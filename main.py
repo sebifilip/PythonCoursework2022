@@ -79,6 +79,8 @@ class Runner:
         else:
             print("Sorry, could not open file!")
 
+        user_name = input("")
+
 
 print("Social network simulator.")
 Runner.run(input("Enter a file name for network data: "))
