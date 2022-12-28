@@ -1,6 +1,6 @@
 from os.path import exists
-from user import User
 from social_network import SocialNetwork
+from printer import Printer
 
 
 class Loader:
@@ -8,7 +8,7 @@ class Loader:
     Opens and reads a .txt file of social network of users.
     """
     @staticmethod
-    def load(data_file_name: str) -> SocialNetwork:
+    def load_network(data_file_name: str) -> SocialNetwork:
         """
         Opens the data file, reads the users and returns the social network.
         :param data_file_name: name of the data file to open and read.
@@ -33,27 +33,6 @@ class Loader:
         return sn
 
 
-class Printer:
-    """
-    Displays the social network on the Python console.
-    """
-    @staticmethod
-    def display(data: SocialNetwork):
-        """
-        Pretty prints the social network on the Python terminal.
-        :param data: list of users and their friends to output.
-        :return: None.
-        """
-        all_users: dict[str, User] = data.users
-        for user_name in all_users:
-            user_friends: list[User] = data.get_friends(user_name)
-            friend_names: list[str] = []
-            for friend in user_friends:
-                friend_names += [friend.name]
-            friend_names_str: str = ", ".join(friend_names)
-            print(f"{user_name} -> {friend_names_str}")
-
-
 class Runner:
     """
     Runs the program.
@@ -66,20 +45,40 @@ class Runner:
         :return: None
         """
         if exists(file_name):
-            social_NW: SocialNetwork = Loader.load(file_name)
-            disp: str = input("Display the social network (y/n)? ")
-            if disp == "n":
+            social_NW: SocialNetwork = Loader.load_network(file_name)
+            disp_network: str = input("Display the social network (y/n)? ")
+            if disp_network == "n":
                 pass
-            elif disp == "y":
-                Printer.display(social_NW)
+            elif disp_network == "y":
+                Printer.display_network(social_NW)
+                while True:
+                    while True:
+                        user_name = input("Enter a username: ")
+                        if user_name not in social_NW.users:
+                            print("Username not found!")
+                        else:
+                            break
+                    Printer.display_recommended_friend(social_NW, user_name)
+                    another = input("Do you want to recommend friends to another user (y/n)? ")
+                    if another == "y":
+                        pass
+                    elif another == "n":
+                        break
+                    else:
+                        print("Invalid input!")
             else:
                 print("Invalid input!")
+
+            disp_cf: str = input("Display common friends matrix (y/n)? ")
+            if disp_cf == "n":
+                pass
+            elif disp_cf == "y":
+                Printer.display_common_friends(social_NW)
+
         elif file_name == "n":
             pass
         else:
             print("Sorry, could not open file!")
-
-        user_name = input("")
 
 
 print("Social network simulator.")

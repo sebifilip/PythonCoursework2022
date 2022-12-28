@@ -14,7 +14,7 @@ class SocialNetwork:
         Initialises the map of users to empty.
         """
         self.users = {}
-        self.common_friends = {}
+        self.common_friends = None
 
     def add_user(self, user_name: str) -> User:
         """
@@ -64,6 +64,28 @@ class SocialNetwork:
             result += [friend]
         return result
 
+    def generate_common_friends(self, common_friends: dict[(str, str), int]) -> dict[str, list[int]]:
+        """
+        Generates a matrix containing the number of common friends for every pair of users in the social network.
+        :param common_friends: dictionary containing a pair of users as the keys and the number of common friends as
+        the values.
+        :return: dictionary containing each username as keys and lists of common friends associated with
+        the other users as the values.
+        """
+        common_matrix = {}
+        for name in sorted(self.users.keys()):
+            common_matrix[name] = []
+        for user in common_matrix:
+            ln: dict[str, int] = {}
+            for (n1, n2) in common_friends:
+                if user == n1:
+                    ln[n2] = common_friends[(n1, n2)]
+            u = self.users[user]
+            ln[user] = len(u.friend_names)
+            for n2 in sorted(ln.keys()):
+                common_matrix[user] += [ln[n2]]
+        return common_matrix
+
     def get_common_friends(self) -> dict[(str, str), int]:
         """
         Gets the number of common friends for each pair of friends in the social network.
@@ -74,24 +96,32 @@ class SocialNetwork:
         return self.common_friends
 
     def _compute_common_friends(self) -> dict[(str, str), int]:
-        result = {}
+        result: dict[(str, str), int] = {}
         for name1 in self.users.keys():
             for name2 in self.users.keys():
                 if name1 != name2:
-                    result = self._compute_friend_count(name1, name2)
+                    result[(name1, name2)] = self._compute_friends_count(name1, name2)
         return result
 
     def _compute_friends_count(self, name1: str, name2: str) -> int:
         l1 = self.users[name1].friend_names
         l2 = self.users[name2].friend_names
         common_num = 0
-        for n1 in l1:
-            if n1 in l2:
+        for n in l1:
+            if n == name1 or n == name2:
+                continue
+            if n in l2:
                 common_num += 1
         return common_num
 
     def recommend_friend(self, user_name: str) -> Optional[str]:
-        u = self.users[user_name]
+        """
+        Gets a username as a parameter and recommends a new friend based on the number of common friends with that
+        potential friend.
+        :param user_name: name of a user seeking a new friend.
+        :return: recommended friend or None.
+        """
+        u: User = self.users[user_name]
         if not u.friend_names:
             return None
         cf = self.get_common_friends()
@@ -99,8 +129,9 @@ class SocialNetwork:
         result = None
         for (n1, n2) in cf.keys():
             if n1 == user_name:
+                if n2 in u.friend_names:
+                    continue
                 if cf[(n1, n2)] > max_common:
                     max_common = cf[(n1, n2)]
                     result = n2
         return result
-
