@@ -45,102 +45,106 @@ class Runner:
         :param file_name: name of the .txt file to open and load.
         :return: None
         """
-        if exists(file_name):
-            social_NW: SocialNetwork = Loader.load_network(file_name)
-            while True:
+        while True:
+            if exists(file_name):
+                social_NW: SocialNetwork = Loader.load_network(file_name)
                 # display network
-                while True:
-                    disp_network: str = input("Display the social network (y/n)? ")
-                    if disp_network == "n":
-                        break
-                    elif disp_network == "y":
-                        Printer.display_network(social_NW)
-                        # recommended friends
-                        while True:
-                            user_name = input("Enter a username: ")
-                            if user_name not in social_NW.users:
-                                print("Username does not exist!")
-                            else:
-                                break
-                        Printer.display_recommended_friend(social_NW, user_name)
+                disp_network: str = input("Display the social network (y/n)? ")
+                if disp_network == "n":
+                    break
+                elif disp_network == "y":
+                    Printer.display_network(social_NW)
+                else:
+                    Printer.display_invalid_input()
 
-                        # common friends
-                        while True:
-                            while True:
-                                disp_cf: str = input("Display common friends matrix (y/n)? ")
-                                if disp_cf == "n":
-                                    break
-                                elif disp_cf == "y":
-                                    Printer.display_common_friends(social_NW)
-                                    break
-                                else:
-                                    Printer.display_invalid_input()
-
+                while disp_network == "y":
+                    # recommended friends
+                    while True:
+                        user_name = input("Enter a username: ")
+                        if user_name not in social_NW.users:
+                            print("Username does not exist!")
+                        else:
+                            Printer.display_recommended_friend(social_NW, user_name)
                             another = input("Do you want to recommend friends to another user (y/n)? ")
                             if another == "y":
-                                while True:
-                                    user_name = input("Enter a username: ")
-                                    if user_name not in social_NW.users:
-                                        print("Username does not exist!")
-                                    else:
+                                user_name = input("Enter a username: ")
+                                if user_name not in social_NW.users:
+                                    print("Username does not exist!")
+                                else:
+                                    Printer.display_recommended_friend(social_NW, user_name)
+                                    another = input("Do you want to recommend friends to another user (y/n)? ")
+                                    if another == "y":
+                                        pass
+                                    elif another == "n":
                                         break
-                                Printer.display_recommended_friend(social_NW, user_name)
+                                    else:
+                                        Printer.display_invalid_input()
                             elif another == "n":
                                 break
                             else:
                                 Printer.display_invalid_input()
 
-                        # number of friends
-                        while True:
-                            disp_num: str = input("Display how many friends a user has (y/n)? ")
-                            if disp_num == "n":
-                                break
-                            elif disp_num == "y":
-                                user_name: str = input("Enter a user name: ")
-                                Printer.display_number_of_friends(social_NW, user_name)
-                                break
-                            else:
-                                Printer.display_invalid_input()
+                    # common friends
+                    while True:
+                        disp_cf: str = input("Display common friends matrix (y/n)? ")
+                        if disp_cf == "n":
+                            break
+                        elif disp_cf == "y":
+                            Printer.display_common_friends(social_NW)
+                            break
+                        else:
+                            Printer.display_invalid_input()
 
-                        # least number of friends
-                        while True:
-                            disp_least: str = input(
-                                "Display the users with the least number of or have 0 friends (y/n)? ")
-                            if disp_least == "n":
-                                break
-                            elif disp_least == "y":
-                                Printer.display_least_num_friends(social_NW)
-                                break
-                            else:
-                                Printer.display_invalid_input()
+                    # number of friends
+                    while True:
+                        disp_num: str = input("Display how many friends a user has (y/n)? ")
+                        if disp_num == "n":
+                            break
+                        elif disp_num == "y":
+                            user_name: str = input("Enter a user name: ")
+                            Printer.display_number_of_friends(social_NW, user_name)
+                            break
+                        else:
+                            Printer.display_invalid_input()
 
-                        # indirect friends
-                        while True:
-                            disp_indirect: str = input("Display the friends of the friends of a given user (y/n)? ")
-                            if disp_indirect == "n":
-                                break
-                            elif disp_indirect == "y":
-                                Printer.display_indirect_relationships(social_NW)
-                                break
-                            else:
-                                Printer.display_invalid_input()
+                    # least number of friends
+                    while True:
+                        disp_least: str = input(
+                            "Display the users with the least number of or have 0 friends (y/n)? ")
+                        if disp_least == "n":
+                            break
+                        elif disp_least == "y":
+                            Printer.display_least_num_friends(social_NW)
+                            break
+                        else:
+                            Printer.display_invalid_input()
 
-                    else:
-                        Printer.display_invalid_input()
+                    # indirect friends
+                    while True:
+                        disp_indirect: str = input("Display the friends of the friends of a given user (y/n)? ")
+                        if disp_indirect == "n":
+                            break
+                        elif disp_indirect == "y":
+                            Printer.display_indirect_relationships(social_NW)
+                            break
+                        else:
+                            Printer.display_invalid_input()
 
-                while True:
-                    another_network = input("Do you want to try another network? ")
-                    if another_network == "y":
-                        Runner.run(input("Enter a file name for network data: "))
-                    elif another_network == "n":
-                        sys.exit()
-                    else:
-                        Printer.display_invalid_input()
+                    # another network
+                    while True:
+                        another_network = input("Do you want to try another network? ")
+                        if another_network == "y":
+                            Runner.run(input("Enter a file name for network data: "))
+                        elif another_network == "n":
+                            sys.exit()
+                        else:
+                            Printer.display_invalid_input()
 
-        elif file_name == "n":
-            pass
-        else:
-            print("Sorry, could not open file!")
+            elif file_name == "n":
+                break
+            else:
+                print("Sorry, could not open file!")
+                file_name = input("Enter a file name for network data: ")
 
 
 print("Social network simulator.")

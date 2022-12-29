@@ -77,6 +77,8 @@ class SocialNetwork:
             common_matrix[name] = []
         for user in common_matrix:
             ln: dict[str, int] = {}
+            if common_friends is None:
+                common_friends = self._compute_common_friends()
             for (n1, n2) in common_friends:
                 if user == n1:
                     ln[n2] = common_friends[(n1, n2)]
