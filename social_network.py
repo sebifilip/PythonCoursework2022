@@ -135,3 +135,46 @@ class SocialNetwork:
                     max_common = cf[(n1, n2)]
                     result = n2
         return result
+
+    # def get_least_friends(self) -> dict[str, list[str]]:
+    #     result = {}
+    #     for name in sorted(self.users.keys()):
+    #         user = self.users[name]
+    #         if len(user.friend_names) == 1:
+    #             result[name] = user.friend_names
+    #     return result
+
+    def get_user_relationship(self, name: str) -> dict[str, list[str]]:
+        """
+        Gets a list of friends corresponding to the given user.
+        :param name: name of user whose friends shall be returned.
+        :return: dictionary containing strings as keys and lists of strings as their value.
+        """
+        result: dict[str, list[str]] = {}
+        user: User = self.users[name]
+        result[name] = user.friend_names
+        return result
+
+    def get_indirect_relationships(self) -> dict[str, list[str]]:
+        """
+        Gets indirect relationships between users (i.e. friend of a friend of a user).
+        :return: dictionary containing strings as keys and lists of strings as their value.
+        """
+        names = self.compute_friendships()
+        indirect_friends: dict[str, list[str]] = {}
+        for n1 in names:
+            for n2 in names:
+                if n1 in names[n2]:
+                    indirect_friends[n1] = names[n2]
+        return indirect_friends
+
+    def compute_friendships(self) -> dict[str, list[str]]:
+        """
+        Adds the usernames (as keys) and their friends (as values) to a dictionary 'names'.
+        :return: dictionary containing strings as keys and lists of strings as their value.
+        """
+        names: dict[str, list[str]] = {}
+        for name in sorted(self.users.keys()):
+            user: User = self.users[name]
+            names[name] = user.friend_names
+        return names

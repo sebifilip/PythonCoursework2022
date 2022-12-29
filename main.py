@@ -1,6 +1,6 @@
-from os.path import exists
 from social_network import SocialNetwork
 from printer import Printer
+from os.path import exists
 
 
 class Loader:
@@ -51,29 +51,54 @@ class Runner:
                 pass
             elif disp_network == "y":
                 Printer.display_network(social_NW)
+                # recommended friends
                 while True:
-                    while True:
-                        user_name = input("Enter a username: ")
-                        if user_name not in social_NW.users:
-                            print("Username not found!")
-                        else:
-                            break
-                    Printer.display_recommended_friend(social_NW, user_name)
-                    another = input("Do you want to recommend friends to another user (y/n)? ")
-                    if another == "y":
-                        pass
-                    elif another == "n":
-                        break
+                    user_name = input("Enter a username: ")
+                    if user_name not in social_NW.users:
+                        print("Username does not exist!")
                     else:
-                        print("Invalid input!")
-            else:
-                print("Invalid input!")
+                        break
+                Printer.display_recommended_friend(social_NW, user_name)
 
-            disp_cf: str = input("Display common friends matrix (y/n)? ")
-            if disp_cf == "n":
-                pass
-            elif disp_cf == "y":
-                Printer.display_common_friends(social_NW)
+                # common friends
+                disp_cf: str = input("Display common friends matrix (y/n)? ")
+                if disp_cf == "n":
+                    pass
+                elif disp_cf == "y":
+                    Printer.display_common_friends(social_NW)
+
+                another = input("Do you want to recommend friends to another user (y/n)? ")
+                if another == "y":
+                    pass
+                elif another == "n":
+                    pass
+                else:
+                    Printer.display_invalid_input()
+
+                # number of friends
+                disp_num: str = input("Display how many friends a user has (y/n)? ")
+                if disp_num == "n":
+                    pass
+                elif disp_num == "y":
+                    user_name: str = input("Enter a user name: ")
+                    Printer.display_number_of_friends(social_NW, user_name)
+
+                # least number of friends
+                disp_least: str = input("Display the users with the least number of or have 0 friends (y/n)? ")
+                if disp_least == "n":
+                    pass
+                elif disp_least == "y":
+                    Printer.display_least_num_friends(social_NW)
+
+                # indirect friends
+                disp_indirect: str = input("Display the friends of the friends of a given user (y/n)? ")
+                if disp_least == "n":
+                    pass
+                elif disp_least == "y":
+                    Printer.display_indirect_relationships(social_NW)
+                    pass
+            else:
+                Printer.display_invalid_input()
 
         elif file_name == "n":
             pass
