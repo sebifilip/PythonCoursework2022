@@ -136,14 +136,6 @@ class SocialNetwork:
                     result = n2
         return result
 
-    # def get_least_friends(self) -> dict[str, list[str]]:
-    #     result = {}
-    #     for name in sorted(self.users.keys()):
-    #         user = self.users[name]
-    #         if len(user.friend_names) == 1:
-    #             result[name] = user.friend_names
-    #     return result
-
     def get_user_relationship(self, name: str) -> dict[str, list[str]]:
         """
         Gets a list of friends corresponding to the given user.
@@ -162,10 +154,13 @@ class SocialNetwork:
         """
         names = self.compute_friendships()
         indirect_friends: dict[str, list[str]] = {}
+        for u in names:
+            indirect_friends[u] = []
         for n1 in names:
-            for n2 in names:
-                if n1 in names[n2]:
-                    indirect_friends[n1] = names[n2]
+            for n2 in names[n1]:
+                for n3 in names[n2]:
+                    if n1 != n3 and n3 not in names[n1]:
+                        indirect_friends[n1] += [n3]
         return indirect_friends
 
     def compute_friendships(self) -> dict[str, list[str]]:

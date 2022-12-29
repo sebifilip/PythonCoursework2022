@@ -13,6 +13,7 @@ class Printer:
         :param data: list of users and their friends to output.
         :return: None.
         """
+        Printer.validate_friendship(data)
         all_users: dict[str, User] = data.users
         for user_name in sorted(all_users.keys()):
             user_friends: list[User] = data.get_friends(user_name)
@@ -21,7 +22,7 @@ class Printer:
                 friend_names += [friend.name]
             friend_names_str: str = ", ".join(sorted(friend_names))
             print(f"{user_name} -> {friend_names_str}")
-        Printer.validate_friendship(data)
+
 
     @staticmethod
     def display_common_friends(data: SocialNetwork):
@@ -98,8 +99,9 @@ class Printer:
         """
         indirect = data.get_indirect_relationships()
         for user_name in indirect:
-            str_indirect: str = ", ".join(sorted(indirect[user_name]))
-            print(f"{user_name} -> {str_indirect}")
+            if len(indirect[user_name]) > 0:
+                str_indirect = ", ".join(sorted(indirect[user_name]))
+                print(f"{user_name} -> {str_indirect}")
 
     @staticmethod
     def validate_friendship(data: SocialNetwork):
@@ -117,12 +119,12 @@ class Printer:
                     if len(names[n1]) != 0 and len(names[n2]) != 0:
                         if n1 in names[n2] and n2 in names[n1]:
                             pass
+                        elif n1 not in names[n2] and n2 not in names[n1]:
+                            pass
                         else:
                             inconsistency_factor += 1
         if inconsistency_factor > 0:
             print("Network is too inconsistent!")
-        else:
-            print("Network is consistent.")
 
     @staticmethod
     def display_invalid_input():
