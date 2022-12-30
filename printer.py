@@ -135,4 +135,8 @@ class Printer:
 
     @staticmethod
     def display_nonexistent_user():
+        """
+        Outputs an error message if a user does not exist in the social network.
+        :return: None.
+        """
         print("Username does not exist!")

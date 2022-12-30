@@ -11,6 +11,11 @@ class Runner:
     """
     @staticmethod
     def menu(data: SocialNetwork):
+        """
+        Displays a menu of choices to make the program more intuitive.
+        :param data: list of users and their friends.
+        :return: None.
+        """
         print("""
         1. Recommend friends
         2. Display common friends
@@ -44,7 +49,7 @@ class Runner:
         """
         Starts running the program.
         :param file_name: name of the .txt file to open and load.
-        :return: None
+        :return: None.
         """
         while True:
             if exists(file_name):
@@ -65,6 +70,11 @@ class Runner:
 
     @staticmethod
     def recommend_friends(network: SocialNetwork):
+        """
+        Asks the user if they want to recommend friends and to enter a name.
+        :param network: list of users and their friends.
+        :return: None.
+        """
         while True:
             user_name = input("Enter a username: ")
             if user_name not in network.users:
@@ -92,6 +102,11 @@ class Runner:
 
     @staticmethod
     def common_friends(network: SocialNetwork):
+        """
+        Asks the user to enter a name and display a matrix of common friends between users.
+        :param network: list of users and their friends.
+        :return: None.
+        """
         while True:
             disp_cf: str = input("Display common friends matrix (y/n)? ")
             if disp_cf == "n":
@@ -104,6 +119,11 @@ class Runner:
 
     @staticmethod
     def num_of_friends(network):
+        """
+        Asks the user to enter a name and display the number of friends.
+        :param network: list of users and their friends.
+        :return: None.
+        """
         while True:
             disp_num: str = input("Display how many friends a user has (y/n)? ")
             if disp_num == "n":
@@ -120,6 +140,11 @@ class Runner:
 
     @staticmethod
     def least_friends(network):
+        """
+        Asks the user if they want to display the users with the least number of friends.
+        :param network: list of users and their friends.
+        :return: None.
+        """
         while True:
             disp_least: str = input("Display the users with the least number of or have 0 friends (y/n)? ")
             if disp_least == "n":
@@ -132,6 +157,11 @@ class Runner:
 
     @staticmethod
     def list_of_friends(network):
+        """
+        Asks the user to enter a name and display their friends.
+        :param network: list of users and their friends.
+        :return: None.
+        """
         while True:
             disp_least: str = input("Display the list of friends for a user (y/n)? ")
             if disp_least == "n":
@@ -148,6 +178,11 @@ class Runner:
 
     @staticmethod
     def indirect_friends(network):
+        """
+        Asks the user to enter a name and display indirect friendships.
+        :param network: list of users and their friends.
+        :return: None.
+        """
         while True:
             disp_indirect: str = input("Display the friends of the friends of a given user (y/n)? ")
             if disp_indirect == "n":
@@ -160,6 +195,10 @@ class Runner:
 
     @staticmethod
     def another_network():
+        """
+        ASks the user if they want to try another social network.
+        :return: None.
+        """
         while True:
             another_network = input("Do you want to try another network? ")
             if another_network == "y":
