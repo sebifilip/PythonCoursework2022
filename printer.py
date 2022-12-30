@@ -23,7 +23,6 @@ class Printer:
             friend_names_str: str = ", ".join(sorted(friend_names))
             print(f"{user_name} -> {friend_names_str}")
 
-
     @staticmethod
     def display_common_friends(data: SocialNetwork):
         """
@@ -133,3 +132,7 @@ class Printer:
         :return: None.
         """
         print("Invalid input!")
+
+    @staticmethod
+    def display_nonexistent_user():
+        print("Username does not exist!")
