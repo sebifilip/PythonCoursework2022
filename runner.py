@@ -83,11 +83,13 @@ class Runner:
         :param network: list of users and their friends.
         :return: None.
         """
-        user_name: str = input("Enter a username: ")
-        if user_name not in network.users:
-            Printer.display_nonexistent_user()
-        else:
-            Printer.display_recommended_friend(network, user_name)
+        while True:
+            user_name: str = input("Enter a username: ")
+            if user_name not in network.users:
+                Printer.display_nonexistent_user()
+            else:
+                Printer.display_recommended_friend(network, user_name)
+                break
 
     @staticmethod
     def common_friends(network: SocialNetwork):
@@ -106,7 +108,7 @@ class Runner:
         :return: None.
         """
         while True:
-            user_name: str = input("Enter a user name: ")
+            user_name: str = input("Enter a username: ")
             if user_name not in network.users:
                 Printer.display_nonexistent_user()
             else:
@@ -130,7 +132,7 @@ class Runner:
         :return: None.
         """
         while True:
-            user_name: str = input("Enter a user name: ")
+            user_name: str = input("Enter a username: ")
             if user_name not in network.users:
                 Printer.display_nonexistent_user()
             else:
