@@ -28,7 +28,7 @@ class Runner:
 7. Quit network
 8. Quit program
             """)
-            choice = input("Please enter a number, 0 to 7: ")
+            choice = input("Please enter a number, 0 to 8: ")
             if choice == "0":
                 Runner.show_network(data)
             elif choice == "1":
