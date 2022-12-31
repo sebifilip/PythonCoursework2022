@@ -16,17 +16,18 @@ class Runner:
         :param data: list of users and their friends.
         :return: None.
         """
-        print("""
-        0. Display network
-        1. Recommend friends
-        2. Display common friends
-        3. Display number of friends
-        4. Display least number of friends
-        5. Display list of friends
-        6. Display indirect friendships
-        7. Quit
-        """)
         while True:
+            print("""
+0. Display network
+1. Recommend friends
+2. Display common friends
+3. Display number of friends
+4. Display least number of friends
+5. Display list of friends
+6. Display indirect friendships
+7. Quit network
+8. Quit program
+            """)
             choice = input("Please enter a number, 0 to 7: ")
             if choice == "0":
                 Runner.show_network(data)
@@ -44,6 +45,8 @@ class Runner:
                 Runner.indirect_friends(data)
             elif choice == "7":
                 Runner.another_network()
+            elif choice == "8":
+                sys.exit()
             else:
                 Printer.display_invalid_input()
 
@@ -65,16 +68,13 @@ class Runner:
                 file_name: str = input("Enter a file name for network data: ")
 
     @staticmethod
-    def show_network(data: SocialNetwork):
-        while True:
-            disp_network: str = input("Display the social network (y/n)? ")
-            if disp_network == "n":
-                break
-            elif disp_network == "y":
-                Printer.display_network(data)
-                break
-            else:
-                Printer.display_invalid_input()
+    def show_network(network: SocialNetwork):
+        """
+        Calls the display_network method to display the social network.
+        :param network: list of users and their friends.
+        :return: None.
+        """
+        Printer.display_network(network)
 
     @staticmethod
     def recommend_friends(network: SocialNetwork):
@@ -83,19 +83,11 @@ class Runner:
         :param network: list of users and their friends.
         :return: None.
         """
-        while True:
-            user_name: str = input("Enter a username: ")
-            if user_name not in network.users:
-                Printer.display_nonexistent_user()
-            else:
-                Printer.display_recommended_friend(network, user_name)
-                another: str = input("Do you want to recommend friends to another user (y/n)? ")
-                if another == "y":
-                    pass
-                elif another == "n":
-                    break
-                else:
-                    Printer.display_invalid_input()
+        user_name: str = input("Enter a username: ")
+        if user_name not in network.users:
+            Printer.display_nonexistent_user()
+        else:
+            Printer.display_recommended_friend(network, user_name)
 
     @staticmethod
     def common_friends(network: SocialNetwork):
@@ -104,15 +96,7 @@ class Runner:
         :param network: list of users and their friends.
         :return: None.
         """
-        while True:
-            disp_cf: str = input("Display common friends matrix (y/n)? ")
-            if disp_cf == "n":
-                break
-            elif disp_cf == "y":
-                Printer.display_common_friends(network)
-                break
-            else:
-                Printer.display_invalid_input()
+        Printer.display_common_friends(network)
 
     @staticmethod
     def num_of_friends(network: SocialNetwork):
@@ -122,18 +106,12 @@ class Runner:
         :return: None.
         """
         while True:
-            disp_num: str = input("Display how many friends a user has (y/n)? ")
-            if disp_num == "n":
-                break
-            elif disp_num == "y":
-                user_name: str = input("Enter a user name: ")
-                if user_name not in network.users:
-                    Printer.display_nonexistent_user()
-                else:
-                    Printer.display_number_of_friends(network, user_name)
-                    break
+            user_name: str = input("Enter a user name: ")
+            if user_name not in network.users:
+                Printer.display_nonexistent_user()
             else:
-                Printer.display_invalid_input()
+                Printer.display_number_of_friends(network, user_name)
+                break
 
     @staticmethod
     def least_friends(network: SocialNetwork):
@@ -142,15 +120,7 @@ class Runner:
         :param network: list of users and their friends.
         :return: None.
         """
-        while True:
-            disp_least: str = input("Display the users with the least number of or have 0 friends (y/n)? ")
-            if disp_least == "n":
-                break
-            elif disp_least == "y":
-                Printer.display_least_num_friends(network)
-                break
-            else:
-                Printer.display_invalid_input()
+        Printer.display_least_num_friends(network)
 
     @staticmethod
     def list_of_friends(network: SocialNetwork):
@@ -160,18 +130,12 @@ class Runner:
         :return: None.
         """
         while True:
-            disp_least: str = input("Display the list of friends for a user (y/n)? ")
-            if disp_least == "n":
-                break
-            elif disp_least == "y":
-                user_name: str = input("Enter a user name: ")
-                if user_name not in network.users:
-                    Printer.display_nonexistent_user()
-                else:
-                    Printer.display_user_relationship(network, user_name)
-                    break
+            user_name: str = input("Enter a user name: ")
+            if user_name not in network.users:
+                Printer.display_nonexistent_user()
             else:
-                Printer.display_invalid_input()
+                Printer.display_user_relationship(network, user_name)
+                break
 
     @staticmethod
     def indirect_friends(network: SocialNetwork):
@@ -180,15 +144,7 @@ class Runner:
         :param network: list of users and their friends.
         :return: None.
         """
-        while True:
-            disp_indirect: str = input("Display the friends of the friends of a given user (y/n)? ")
-            if disp_indirect == "n":
-                break
-            elif disp_indirect == "y":
-                Printer.display_indirect_relationships(network)
-                break
-            else:
-                Printer.display_invalid_input()
+        Printer.display_indirect_relationships(network)
 
     @staticmethod
     def another_network():
@@ -196,11 +152,4 @@ class Runner:
         ASks the user if they want to try another social network.
         :return: None.
         """
-        while True:
-            another_network: str = input("Do you want to try another network? ")
-            if another_network == "y":
-                Runner.run_program(input("Enter a file name for network data: "))
-            elif another_network == "n":
-                sys.exit()
-            else:
-                Printer.display_invalid_input()
+        Runner.run_program(input("Enter a file name for network data: "))
