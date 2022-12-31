@@ -18,6 +18,7 @@ class Runner:
         """
         while True:
             print("""
+====================================
 0. Display network
 1. Recommend friends
 2. Display common friends
@@ -27,6 +28,7 @@ class Runner:
 6. Display indirect friendships
 7. Quit network
 8. Quit program
+====================================
             """)
             choice = input("Please enter a number, 0 to 8: ")
             if choice == "0":
