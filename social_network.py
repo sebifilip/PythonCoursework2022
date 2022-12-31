@@ -72,18 +72,18 @@ class SocialNetwork:
         :return: dictionary containing each username as keys and lists of common friends associated with
         the other users as the values.
         """
-        common_matrix = {}
+        common_matrix: dict = {}
         for name in sorted(self.users.keys()):
             common_matrix[name] = []
         for user in common_matrix:
             ln: dict[str, int] = {}
             if common_friends is None:
-                common_friends = self._compute_common_friends()
+                common_friends: dict = self._compute_common_friends()
             for (n1, n2) in common_friends:
                 if user == n1:
                     ln[n2] = common_friends[(n1, n2)]
-            u = self.users[user]
-            ln[user] = len(u.friend_names)
+            u: User = self.users[user]
+            ln[user]: list = len(u.friend_names)
             for n2 in sorted(ln.keys()):
                 common_matrix[user] += [ln[n2]]
         return common_matrix
@@ -106,9 +106,9 @@ class SocialNetwork:
         return result
 
     def _compute_friends_count(self, name1: str, name2: str) -> int:
-        l1 = self.users[name1].friend_names
-        l2 = self.users[name2].friend_names
-        common_num = 0
+        l1: list = self.users[name1].friend_names
+        l2: list = self.users[name2].friend_names
+        common_num: int = 0
         for n in l1:
             if n == name1 or n == name2:
                 continue
@@ -126,8 +126,8 @@ class SocialNetwork:
         u: User = self.users[user_name]
         if not u.friend_names:
             return None
-        cf = self.get_common_friends()
-        max_common = 0
+        cf: dict[(str, str), int] = self.get_common_friends()
+        max_common: int = 0
         result = None
         for (n1, n2) in cf.keys():
             if n1 == user_name:
@@ -173,5 +173,5 @@ class SocialNetwork:
         names: dict[str, list[str]] = {}
         for name in sorted(self.users.keys()):
             user: User = self.users[name]
-            names[name] = user.friend_names
+            names[name]: list = user.friend_names
         return names

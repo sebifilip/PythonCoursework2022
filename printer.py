@@ -54,7 +54,7 @@ class Printer:
         :param user_name: name of the user to output its number of friends.
         :return:
         """
-        u = data.users[user_name]
+        u: User = data.users[user_name]
         print(f"{user_name} has {len(u.friend_names)} friends")
 
     @staticmethod
@@ -67,7 +67,7 @@ class Printer:
         zero_friends: list[str] = []
         one_friend: list[str] = []
         for name in sorted(data.users.keys()):
-            user = data.users[name]
+            user: User = data.users[name]
             if len(user.friend_names) == 1:
                 one_friend.append(name)
             elif len(user.friend_names) == 0:
@@ -86,7 +86,7 @@ class Printer:
         :return: None.
         """
         relationship = data.get_user_relationship(user_name)
-        str_relationship = ", ".join(sorted(relationship[user_name]))
+        str_relationship: str = ", ".join(sorted(relationship[user_name]))
         print(f"{user_name} is friends with {str_relationship}")
 
     @staticmethod
