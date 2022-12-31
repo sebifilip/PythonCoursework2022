@@ -118,7 +118,7 @@ class Runner:
                 Printer.display_invalid_input()
 
     @staticmethod
-    def num_of_friends(network):
+    def num_of_friends(network: SocialNetwork):
         """
         Asks the user to enter a name and display the number of friends.
         :param network: list of users and their friends.
@@ -139,7 +139,7 @@ class Runner:
                 Printer.display_invalid_input()
 
     @staticmethod
-    def least_friends(network):
+    def least_friends(network: SocialNetwork):
         """
         Asks the user if they want to display the users with the least number of friends.
         :param network: list of users and their friends.
@@ -156,7 +156,7 @@ class Runner:
                 Printer.display_invalid_input()
 
     @staticmethod
-    def list_of_friends(network):
+    def list_of_friends(network: SocialNetwork):
         """
         Asks the user to enter a name and display their friends.
         :param network: list of users and their friends.
@@ -177,7 +177,7 @@ class Runner:
                 Printer.display_invalid_input()
 
     @staticmethod
-    def indirect_friends(network):
+    def indirect_friends(network: SocialNetwork):
         """
         Asks the user to enter a name and display indirect friendships.
         :param network: list of users and their friends.
