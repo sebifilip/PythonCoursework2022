@@ -50,7 +50,7 @@ class Runner:
             elif choice == "8":
                 sys.exit()
             else:
-                Printer.display_invalid_input()
+                print("Invalid input!")
 
     @staticmethod
     def run_program(file_name: str):
@@ -88,7 +88,7 @@ class Runner:
         while True:
             user_name: str = input("Enter a username: ")
             if user_name not in network.users:
-                Printer.display_nonexistent_user()
+                print("Username does not exist!")
             else:
                 Printer.display_recommended_friend(network, user_name)
                 break
@@ -112,7 +112,7 @@ class Runner:
         while True:
             user_name: str = input("Enter a username: ")
             if user_name not in network.users:
-                Printer.display_nonexistent_user()
+                print("Username does not exist!")
             else:
                 Printer.display_number_of_friends(network, user_name)
                 break
