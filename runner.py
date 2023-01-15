@@ -156,4 +156,4 @@ class Runner:
         ASks the user if they want to try another social network.
         :return: None.
         """
-        Runner(self._loader, self._printer).run_program(input("Enter a file name for network data:"))
+        Runner(self._loader, self._printer).run_program(input("Enter a file name for network data: "))
