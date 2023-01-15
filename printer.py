@@ -4,7 +4,7 @@ from user import User
 
 class Printer:
     """
-    Displays the social network on the Python console.
+    Displays the social network.
     """
     def display_network(self, data: SocialNetwork):
         pass
