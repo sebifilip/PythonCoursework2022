@@ -1,7 +1,8 @@
 from social_network import SocialNetwork
-from console_printer import ConsolePrinter
 from os.path import exists
 from loader import Loader
+from printer import Printer
+from printable_social_network import PrintableSocialNetwork
 import sys
 
 
@@ -9,8 +10,31 @@ class Runner:
     """
     Runs the program.
     """
-    @staticmethod
-    def menu(data: SocialNetwork):
+
+    _loader: Loader
+    _printer: Printer
+
+    def __init__(self, loader: Loader, printer: Printer):
+        self._loader = loader
+        self._printer = printer
+
+    def run_program(self, file_name: str):
+        """
+        Starts running the program.
+        :param file_name: name of the .txt file to open and load.
+        :return: None.
+        """
+        while True:
+            if file_name == "n":
+                break
+            elif exists(file_name):
+                social_nw: SocialNetwork = self._loader.load_network(file_name)
+                self.menu(social_nw)
+            else:
+                print("Sorry, could not open file!")
+                file_name: str = input("Enter a file name for network data: ")
+
+    def menu(self, data: SocialNetwork):
         """
         Displays a menu of choices to make the program more intuitive.
         :param data: list of users and their friends.
@@ -32,54 +56,36 @@ class Runner:
             """)
             choice = input("Please enter a number, 0 to 8: ")
             if choice == "0":
-                Runner.show_network(data)
+                self.show_network(data)
             elif choice == "1":
-                Runner.recommend_friends(data)
+                self.recommend_friends(data)
             elif choice == "2":
-                Runner.common_friends(data)
+                self.common_friends(data)
             elif choice == "3":
-                Runner.num_of_friends(data)
+                self.num_of_friends(data)
             elif choice == "4":
-                Runner.least_friends(data)
+                self.least_friends(data)
             elif choice == "5":
-                Runner.list_of_friends(data)
+                self.list_of_friends(data)
             elif choice == "6":
-                Runner.indirect_friends(data)
+                self.indirect_friends(data)
             elif choice == "7":
-                Runner.another_network()
+                self.another_network()
+                break
             elif choice == "8":
                 sys.exit()
             else:
                 print("Invalid input!")
 
-    @staticmethod
-    def run_program(file_name: str):
-        """
-        Starts running the program.
-        :param file_name: name of the .txt file to open and load.
-        :return: None.
-        """
-        while True:
-            if exists(file_name):
-                social_NW: SocialNetwork = Loader.load_network(file_name)
-                Runner.menu(social_NW)
-            elif file_name == "n":
-                break
-            else:
-                print("Sorry, could not open file!")
-                file_name: str = input("Enter a file name for network data: ")
-
-    @staticmethod
-    def show_network(network: SocialNetwork):
+    def show_network(self, network: SocialNetwork):
         """
         Calls the display_network method to display the social network.
         :param network: list of users and their friends.
         :return: None.
         """
-        ConsolePrinter.display_network(network)
+        PrintableSocialNetwork(self._printer, network).display_network()
 
-    @staticmethod
-    def recommend_friends(network: SocialNetwork):
+    def recommend_friends(self, network: SocialNetwork):
         """
         Asks the user if they want to recommend friends and to enter a name.
         :param network: list of users and their friends.
@@ -90,20 +96,18 @@ class Runner:
             if user_name not in network.users:
                 print("Username does not exist!")
             else:
-                ConsolePrinter.display_recommended_friend(network, user_name)
+                PrintableSocialNetwork(self._printer, network).display_recommended_friend(user_name)
                 break
 
-    @staticmethod
-    def common_friends(network: SocialNetwork):
+    def common_friends(self, network: SocialNetwork):
         """
         Asks the user to enter a name and display a matrix of common friends between users.
         :param network: list of users and their friends.
         :return: None.
         """
-        ConsolePrinter.display_common_friends(network)
+        PrintableSocialNetwork(self._printer, network).display_common_friends()
 
-    @staticmethod
-    def num_of_friends(network: SocialNetwork):
+    def num_of_friends(self, network: SocialNetwork):
         """
         Asks the user to enter a name and display the number of friends.
         :param network: list of users and their friends.
@@ -114,20 +118,18 @@ class Runner:
             if user_name not in network.users:
                 print("Username does not exist!")
             else:
-                ConsolePrinter.display_number_of_friends(network, user_name)
+                PrintableSocialNetwork(self._printer, network).display_number_of_friends(user_name)
                 break
 
-    @staticmethod
-    def least_friends(network: SocialNetwork):
+    def least_friends(self, network: SocialNetwork):
         """
         Asks the user if they want to display the users with the least number of friends.
         :param network: list of users and their friends.
         :return: None.
         """
-        ConsolePrinter.display_least_num_friends(network)
+        PrintableSocialNetwork(self._printer, network).display_least_num_friends()
 
-    @staticmethod
-    def list_of_friends(network: SocialNetwork):
+    def list_of_friends(self, network: SocialNetwork):
         """
         Asks the user to enter a name and display their friends.
         :param network: list of users and their friends.
@@ -136,24 +138,22 @@ class Runner:
         while True:
             user_name: str = input("Enter a username: ")
             if user_name not in network.users:
-                ConsolePrinter.display_nonexistent_user()
+                print("User not found!")
             else:
-                ConsolePrinter.display_user_relationship(network, user_name)
+                PrintableSocialNetwork(self._printer, network).display_user_relationship(user_name)
                 break
 
-    @staticmethod
-    def indirect_friends(network: SocialNetwork):
+    def indirect_friends(self, network: SocialNetwork):
         """
         Asks the user to enter a name and display indirect friendships.
         :param network: list of users and their friends.
         :return: None.
         """
-        ConsolePrinter.display_indirect_relationships(network)
+        PrintableSocialNetwork(self._printer, network).display_indirect_relationships()
 
-    @staticmethod
-    def another_network():
+    def another_network(self):
         """
         ASks the user if they want to try another social network.
         :return: None.
         """
-        Runner.run_program(input("Enter a file name for network data: "))
+        Runner(self._loader, self._printer).run_program(input("Enter a file name for network data:"))

@@ -5,16 +5,16 @@ class Loader:
     """
     Opens and reads a .txt file of social network of users.
     """
-    @staticmethod
-    def load_network(data_file_name: str) -> SocialNetwork:
+
+    def load_network(self, location: str) -> SocialNetwork:
         """
         Opens the data file, reads the users and returns the social network.
-        :param data_file_name: name of the data file to open and read.
+        :param location: where to get data from. Here, it is the name of the data file to open and read.
         :return: social network object.
         """
         sn: SocialNetwork = SocialNetwork()
         i = 0
-        with open(data_file_name, "r") as reader:
+        with open(location, "r") as reader:
             for line in reader.readlines():
                 line = line.strip()
                 if i > 0:
