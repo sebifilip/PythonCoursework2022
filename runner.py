@@ -1,5 +1,5 @@
 from social_network import SocialNetwork
-from printer import Printer
+from console_printer import ConsolePrinter
 from os.path import exists
 from loader import Loader
 import sys
@@ -76,7 +76,7 @@ class Runner:
         :param network: list of users and their friends.
         :return: None.
         """
-        Printer.display_network(network)
+        ConsolePrinter.display_network(network)
 
     @staticmethod
     def recommend_friends(network: SocialNetwork):
@@ -90,7 +90,7 @@ class Runner:
             if user_name not in network.users:
                 print("Username does not exist!")
             else:
-                Printer.display_recommended_friend(network, user_name)
+                ConsolePrinter.display_recommended_friend(network, user_name)
                 break
 
     @staticmethod
@@ -100,7 +100,7 @@ class Runner:
         :param network: list of users and their friends.
         :return: None.
         """
-        Printer.display_common_friends(network)
+        ConsolePrinter.display_common_friends(network)
 
     @staticmethod
     def num_of_friends(network: SocialNetwork):
@@ -114,7 +114,7 @@ class Runner:
             if user_name not in network.users:
                 print("Username does not exist!")
             else:
-                Printer.display_number_of_friends(network, user_name)
+                ConsolePrinter.display_number_of_friends(network, user_name)
                 break
 
     @staticmethod
@@ -124,7 +124,7 @@ class Runner:
         :param network: list of users and their friends.
         :return: None.
         """
-        Printer.display_least_num_friends(network)
+        ConsolePrinter.display_least_num_friends(network)
 
     @staticmethod
     def list_of_friends(network: SocialNetwork):
@@ -136,9 +136,9 @@ class Runner:
         while True:
             user_name: str = input("Enter a username: ")
             if user_name not in network.users:
-                Printer.display_nonexistent_user()
+                ConsolePrinter.display_nonexistent_user()
             else:
-                Printer.display_user_relationship(network, user_name)
+                ConsolePrinter.display_user_relationship(network, user_name)
                 break
 
     @staticmethod
@@ -148,7 +148,7 @@ class Runner:
         :param network: list of users and their friends.
         :return: None.
         """
-        Printer.display_indirect_relationships(network)
+        ConsolePrinter.display_indirect_relationships(network)
 
     @staticmethod
     def another_network():
