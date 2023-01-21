@@ -1,5 +1,4 @@
 from social_network import SocialNetwork
-from user import User
 
 
 class Printer:
