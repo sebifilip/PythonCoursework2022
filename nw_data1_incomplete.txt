@@ -1,12 +1,7 @@
 7
 Adam Bob
-Bob Adam
 Bob Amir
-Amir Bob
 Bob Mia
-Mia Bob
 Chris Zia
-Zia Chris
 Mia Amir
-Amir Mia
 Liz

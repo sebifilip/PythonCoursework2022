@@ -28,4 +28,5 @@ class Loader:
                     else:
                         raise ValueError("Social network line does not have one or two elements: " + line)
                 i += 1
+        sn.validate()
         return sn

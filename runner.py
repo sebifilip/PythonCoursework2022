@@ -1,4 +1,4 @@
-from social_network import SocialNetwork
+from social_network import SocialNetwork, InconsistentException
 from os.path import exists
 from loader import Loader
 from printer import Printer
@@ -28,8 +28,13 @@ class Runner:
             if file_name == "n":
                 break
             elif exists(file_name):
-                social_nw: SocialNetwork = self._loader.load_network(file_name)
-                self.menu(social_nw)
+                try:
+                    social_nw: SocialNetwork = self._loader.load_network(file_name)
+                except InconsistentException as e:
+                    print(str(e))
+                    file_name: str = input("Enter a file name for network data: ")
+                else:
+                    self.menu(social_nw)
             else:
                 print("Sorry, could not open file!")
                 file_name: str = input("Enter a file name for network data: ")

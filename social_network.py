@@ -2,6 +2,15 @@ from typing import Optional
 from user import User
 
 
+class InconsistentException(Exception):
+    """
+    Exception raised when the social network is inconsistent.
+    """
+    def __init__(self, friend, user):
+        Exception.__init__(self, f"Inconsistent social network. User '{friend}' is friend with user '{user}' but the "
+                                 f"reverse is not true.")
+
+
 class SocialNetwork:
     """
     Encapsulation of the users and their friends.
@@ -36,7 +45,7 @@ class SocialNetwork:
         user: User = self.add_user(user_name)
         friend: User = self.add_user(friend_name)
         user.add_friend(friend_name)
-        friend.add_friend(user_name)
+        # friend.add_friend(user_name)
         return friend
 
     def get_user(self, user_name: str) -> Optional[User]:
@@ -175,3 +184,17 @@ class SocialNetwork:
             user: User = self.users[name]
             names[name]: list = user.friend_names
         return names
+
+    def validate(self):
+        """
+        Checks if a user is friends with another user and vice versa.
+        :return: None
+        """
+        for user in self.users:
+            u: User = self.users[user]
+            for friend in u.friend_names:
+                f: User = self.users[friend]
+                if user in f.friend_names:
+                    pass
+                else:
+                    raise InconsistentException(friend, user)
