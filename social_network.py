@@ -20,7 +20,7 @@ class SocialNetwork:
 
     def __init__(self):
         """
-        Initialises the map of users to empty.
+        Initialises the map of users to empty and common friends to None.
         """
         self.users = {}
         self.common_friends = None

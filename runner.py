@@ -15,6 +15,11 @@ class Runner:
     _printer: Printer
 
     def __init__(self, loader: Loader, printer: Printer):
+        """
+        Initialises the Loader and Printer instances to run the program.
+        :param loader: Loader instance to load the social network.
+        :param printer: Printer instance to output the network.
+        """
         self._loader = loader
         self._printer = printer
 
