@@ -8,6 +8,7 @@ class PrintableSocialNetwork(SocialNetwork):
     Prints the social network to the console.
     """
     _printer: Printer
+    _data: SocialNetwork
 
     def __init__(self, printer: Printer, data: Optional[SocialNetwork] = None):
         """

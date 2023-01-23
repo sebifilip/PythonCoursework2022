@@ -7,7 +7,7 @@ class Printer:
     """
     def display_network(self, data: SocialNetwork):
         """
-        Pretty prints the social network on the Python terminal.
+        Prints the social network.
         :param data: list of users and their friends to output.
         :return: None.
         """
@@ -15,7 +15,7 @@ class Printer:
 
     def display_common_friends(self, data: SocialNetwork):
         """
-        Pretty prints the number of common friends per pair of users.
+        Prints the number of common friends per pair of users.
         :param data: list of users and number of common friends with each of the other users to output.
         :return: None.
         """
