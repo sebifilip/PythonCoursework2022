@@ -10,7 +10,6 @@ class Runner:
     """
     Runs the program.
     """
-
     _loader: Loader
     _printer: Printer
 

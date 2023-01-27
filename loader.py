@@ -5,7 +5,6 @@ class Loader:
     """
     Opens and reads a .txt file of social network of users.
     """
-
     def load_network(self, location: str) -> SocialNetwork:
         """
         Opens the data file, reads the users and returns the social network.
