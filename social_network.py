@@ -73,6 +73,7 @@ class SocialNetwork:
             result += [friend]
         return result
 
+    # Feature 2 i.
     def generate_common_friends(self, common_friends: dict[(str, str), int]) -> dict[str, list[int]]:
         """
         Generates a matrix containing the number of common friends for every pair of users in the social network.
@@ -125,6 +126,7 @@ class SocialNetwork:
                 common_num += 1
         return common_num
 
+    # Feature 2 ii.
     def recommend_friend(self, user_name: str) -> Optional[str]:
         """
         Gets a username as a parameter and recommends a new friend based on the number of common friends with that
@@ -147,6 +149,7 @@ class SocialNetwork:
                     result = n2
         return result
 
+    # Feature 3 iii.
     def get_user_relationship(self, name: str) -> dict[str, list[str]]:
         """
         Gets a list of friends corresponding to the given user.
@@ -158,6 +161,7 @@ class SocialNetwork:
         result[name] = user.friend_names
         return result
 
+    # Feature 3 iv.
     def get_indirect_relationships(self) -> dict[str, list[str]]:
         """
         Gets indirect relationships between users (i.e. friend of a friend of a user).
@@ -185,6 +189,7 @@ class SocialNetwork:
             names[name]: list = user.friend_names
         return names
 
+    # Feature 3 v.
     def validate(self):
         """
         Checks if a user is friends with another user and vice versa.

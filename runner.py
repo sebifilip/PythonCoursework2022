@@ -22,6 +22,7 @@ class Runner:
         self._loader = loader
         self._printer = printer
 
+    # Feature 1 i.
     def run_program(self, file_name: str):
         """
         Starts running the program.
@@ -86,6 +87,7 @@ class Runner:
             else:
                 print("Invalid input!")
 
+    # Feature 1 ii.
     def show_network(self, network: SocialNetwork):
         """
         Calls the display_network method to display the social network.
@@ -94,6 +96,7 @@ class Runner:
         """
         PrintableSocialNetwork(self._printer, network).display_network()
 
+    # Feature 2 ii.
     def recommend_friends(self, network: SocialNetwork):
         """
         Asks the user if they want to recommend friends and to enter a name.
@@ -108,6 +111,7 @@ class Runner:
                 PrintableSocialNetwork(self._printer, network).display_recommended_friend(user_name)
                 break
 
+    # Feature 2 i.
     def common_friends(self, network: SocialNetwork):
         """
         Asks the user to enter a name and display a matrix of common friends between users.
@@ -116,6 +120,7 @@ class Runner:
         """
         PrintableSocialNetwork(self._printer, network).display_common_friends()
 
+    # Feature 3 i.
     def num_of_friends(self, network: SocialNetwork):
         """
         Asks the user to enter a name and display the number of friends.
@@ -130,6 +135,7 @@ class Runner:
                 PrintableSocialNetwork(self._printer, network).display_number_of_friends(user_name)
                 break
 
+    # Feature 3 ii.
     def least_friends(self, network: SocialNetwork):
         """
         Asks the user if they want to display the users with the least number of friends.
@@ -138,6 +144,7 @@ class Runner:
         """
         PrintableSocialNetwork(self._printer, network).display_least_num_friends()
 
+    # Feature 3 iii.
     def list_of_friends(self, network: SocialNetwork):
         """
         Asks the user to enter a name and display their friends.
@@ -152,6 +159,7 @@ class Runner:
                 PrintableSocialNetwork(self._printer, network).display_user_relationship(user_name)
                 break
 
+    # Feature 3 iv.
     def indirect_friends(self, network: SocialNetwork):
         """
         Asks the user to enter a name and display indirect friendships.

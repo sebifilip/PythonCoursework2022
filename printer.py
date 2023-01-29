@@ -5,6 +5,7 @@ class Printer:
     """
     Displays the social network.
     """
+    # Feature 1 ii.
     def display_network(self, data: SocialNetwork):
         """
         Prints the social network.
@@ -13,6 +14,7 @@ class Printer:
         """
         pass
 
+    # Feature 2 i.
     def display_common_friends(self, data: SocialNetwork):
         """
         Prints the number of common friends per pair of users.
@@ -21,6 +23,7 @@ class Printer:
         """
         pass
 
+    # Feature 2 ii.
     def display_recommended_friend(self, data: SocialNetwork, user_name: str):
         """
         Prints the friend recommendation for a given user.
@@ -30,6 +33,7 @@ class Printer:
         """
         pass
 
+    # Feature 3 i.
     def display_number_of_friends(self, data: SocialNetwork, user_name: str):
         """
         Prints the number of friends for a given user.
@@ -39,6 +43,7 @@ class Printer:
         """
         pass
 
+    # Feature 3 ii.
     def display_least_num_friends(self, data: SocialNetwork):
         """
         Prints the names of the user s with less than 2 friends.
@@ -47,6 +52,7 @@ class Printer:
         """
         pass
 
+    # Feature 3 iii.
     def display_user_relationship(self, data: SocialNetwork, user_name: str):
         """
         Prints the username and their list of friends.
@@ -56,6 +62,7 @@ class Printer:
         """
         pass
 
+    # Feature 3 iv.
     def display_indirect_relationships(self, data: SocialNetwork):
         """
         Prints indirect relations of users.

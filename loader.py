@@ -1,6 +1,7 @@
 from social_network import SocialNetwork
 
 
+# Feature 1 ii.
 class Loader:
     """
     Opens and reads a .txt file of social network of users.
